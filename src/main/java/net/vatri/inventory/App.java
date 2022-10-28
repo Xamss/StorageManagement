@@ -39,7 +39,7 @@ public class App extends Application {
         getInstance().pageSwitcher = new FxPageSwitcher((node) -> mainPane.setCenter(node), Arrays.asList(
             new FxPage("login", "LoginView"),
             new FxPage("register", "RegisterView"),
-            new FxPage("products", "ProductsView"),
+            new FxPage("products", "ProductsView"), new FxPage("dashboard", "DashBoardView"),
             new FxPage("newProduct", "AddEditProductView"),
             new FxPage("groups", "GroupsView"),
             new FxPage("addEditGroup", "AddEditGroupView"),
