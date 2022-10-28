@@ -3,6 +3,7 @@ package net.vatri.inventory.libs;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import net.vatri.inventory.App;
+import net.vatri.inventory.models.StockModel;
 
 import java.net.URL;
 
@@ -20,14 +21,9 @@ public class FxView extends Pane {
             fxElement = new FXMLLoader().load(fileUrl);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            // System.out.println(e.printStackTrace());
-//            e.printStackTrace();
         }
     }
-
     public Pane get(){
         return fxElement;
     }
-
-
 }

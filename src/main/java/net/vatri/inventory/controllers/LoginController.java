@@ -24,10 +24,9 @@ public class LoginController extends BaseController{
     protected void btnLoginPressed(ActionEvent event) {
         User user = inventoryService.getUserByEmail(emailField.getText());
         if (user.getPassword().equals(passwordField.getText())) {
-            App.showPage("dashboard");
+            App.showPage("products");
         } else {
             errorLabel.setVisible(true);
-
         }
     }
     @FXML

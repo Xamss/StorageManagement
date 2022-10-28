@@ -20,7 +20,7 @@ public interface InventoryService {
 
     public boolean saveProduct(Product product);
 
-    // Todo: offset + limit
+
     public List<ProductGroup> getGroups();
 
     public ProductGroup getGroup(String id);

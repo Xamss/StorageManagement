@@ -61,7 +61,7 @@ public class OrdersController extends BaseController implements Initializable {
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
         commentCol.setCellValueFactory(new PropertyValueFactory<>("comment"));
 
-    }// all()
+    }
 
     @FXML
     private void handleFilterByType() {

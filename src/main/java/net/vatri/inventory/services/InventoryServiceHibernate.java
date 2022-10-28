@@ -301,4 +301,7 @@ public class InventoryServiceHibernate implements InventoryService {
 
         return out;
     }
+
+
+
 }

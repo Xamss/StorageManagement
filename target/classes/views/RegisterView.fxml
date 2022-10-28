@@ -24,8 +24,8 @@
                 <Font size="15.0" fx:id="x1" />
             </font>
         </Button>
-        <Label fx:id="errorLabel" font="$x1" layoutX="265.0" layoutY="214.0" text="Login failed!" textFill="RED" visible="false" />
-        <Label fx:id="goodLabel" font="$x1" layoutX="265.0" layoutY="214.0" text="Login succeed!" textFill="GREEN" visible="false" />
+        <Label fx:id="errorLabel" font="$x1" layoutX="253.0" layoutY="331.0" prefHeight="19.0" prefWidth="94.0" text="Login failed!" textFill="RED" visible="false" />
+        <Label fx:id="goodLabel" font="$x1" layoutX="239.0" layoutY="331.0" text="Login succeed!" textFill="GREEN" visible="false" />
         <Label focusTraversable="false" layoutY="14.0" opacity="1.0" prefWidth="460.0" text="Inventory Management" textAlignment="JUSTIFY" textFill="#008d96" underline="false" AnchorPane.leftAnchor="65.5" AnchorPane.rightAnchor="74.5">
             <font>
                 <Font name="System Bold" size="33.0" />

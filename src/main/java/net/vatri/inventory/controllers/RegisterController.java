@@ -27,14 +27,18 @@ public class RegisterController extends BaseController{
     private Label goodLabel;
 
     @FXML
-    protected void btnRegisterPressed(ActionEvent event) {
+    protected boolean btnRegisterPressed(ActionEvent event) {
         List<User> users = inventoryService.getUsers();
-
+        if(!emailField.getText().matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")){
+            goodLabel.setVisible(false);
+            errorLabel.setVisible(true);
+            return false;
+        }
         for(User user: users){
             if(user.getEmail().equals(emailField.getText())){
                 goodLabel.setVisible(false);
                 errorLabel.setVisible(true);
-                return;
+                return false;
             }
         }
         errorLabel.setVisible(false);
@@ -54,6 +58,7 @@ public class RegisterController extends BaseController{
             System.out.println("Can't save User!");
             errorLabel.setVisible(true);
         }
+        return true;
     }
 
     @FXML

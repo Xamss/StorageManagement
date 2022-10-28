@@ -49,7 +49,7 @@ public class ProductsController extends BaseController implements Initializable 
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         tblProducts.setItems(tblData);
-    }// all()
+    }
 
     @FXML
     protected void handleAddProd() {

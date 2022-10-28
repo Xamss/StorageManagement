@@ -1,6 +1,6 @@
 package net.vatri.inventory;
 
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.AnchorPane;
 import net.vatri.inventory.libs.*;
 
 import java.util.Arrays;
@@ -19,28 +19,17 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class App extends Application {
 
-    private static BorderPane mainPane = new BorderPane();
+    protected static BorderPane mainPane = new BorderPane();
     private static Parent mainMenu;
-    private static Map<String, String> _config;
 
-    static {
-        _config = new HashMap<String, String>();
-        _config.put("db_connection", "jdbc:sqlite:InvMan.sqlite3");
-    }
 
-    /**
-     * Data repository for exchange between controllers.
-     **/
+
     public Map<String, String> repository = new HashMap<String, String>();
 
-    /**
-     * Variable for the singleton pattern...
-     **/
+
     private static App instance = null;
 
-    /**
-     * Hibernate session factory
-     **/
+
     private SessionFactory sessionFactory = null;
 
     private FxPageSwitcher pageSwitcher;
@@ -50,7 +39,6 @@ public class App extends Application {
         getInstance().pageSwitcher = new FxPageSwitcher((node) -> mainPane.setCenter(node), Arrays.asList(
             new FxPage("login", "LoginView"),
             new FxPage("register", "RegisterView"),
-            new FxPage("dashboard", "DashBoardView"),
             new FxPage("products", "ProductsView"),
             new FxPage("newProduct", "AddEditProductView"),
             new FxPage("groups", "GroupsView"),
@@ -61,15 +49,16 @@ public class App extends Application {
         ));
 
         mainMenu = new FxView("Menu").get();
-        mainMenu.setVisible(false);
 
+        mainMenu.setVisible(false);
+        ((AnchorPane)mainMenu).setPrefWidth(0);
         mainPane.setLeft(mainMenu);
 
         primaryStage.setScene(new Scene(mainPane, 800, 600));
         primaryStage.setTitle("Inventory Management");
         primaryStage.show();
 
-        getInstance().pageSwitcher.showPage("login");
+        showPage("login");
     }
 
     @Override
@@ -79,19 +68,15 @@ public class App extends Application {
 
 
     public static void showPage(String page){
-        if(page != "login"){
+        if(!Arrays.asList("register","login").contains(page)){
+            ((AnchorPane)mainMenu).setPrefWidth(178);
             mainMenu.setVisible(true);
         }
         getInstance().pageSwitcher.showPage(page);
     }
 
-    public static String getConfig(String item) {
-        return _config.get(item);
-    }
 
-    /**
-     * Return signleton instance...
-     **/
+
     public static App getInstance() {
         if (instance == null) {
             instance = new App();
@@ -102,13 +87,12 @@ public class App extends Application {
     public SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                    .configure() // configures settings from hibernate.cfg.xml
+                    .configure()
                     .build();
             try {
                 sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
             } catch (Exception e) {
-                // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-                // so destroy it manually.
+
                 StandardServiceRegistryBuilder.destroy(registry);
                 System.out.println(e.getMessage());
             }

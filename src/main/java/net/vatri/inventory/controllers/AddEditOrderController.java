@@ -127,7 +127,6 @@ public class AddEditOrderController extends BaseController implements Initializa
         comboVariants.getSelectionModel().selectFirst();
     }
 
-    // Fired when product in the combo is selected:
     @FXML
     private void productSelected() {
         if (comboProducts.getSelectionModel().getSelectedItem() instanceof Product == false) {
@@ -139,7 +138,6 @@ public class AddEditOrderController extends BaseController implements Initializa
         _fillVariantsCombo(selectedProduct);
     }
 
-    // Fired when Add button is clicked
     @FXML
     private void addProduct() {
 
@@ -219,4 +217,4 @@ public class AddEditOrderController extends BaseController implements Initializa
         }
     }
 
-}//class
+}

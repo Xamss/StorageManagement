@@ -70,7 +70,6 @@ public class AddEditGroupController extends BaseController implements Initializa
             return false;
         } else {
 
-            // Set model data and save into database:
             ProductGroup group = new ProductGroup();
             if (_groupId != null && !_groupId.equals("")) {
                 group = inventoryService.getGroup(_groupId);
