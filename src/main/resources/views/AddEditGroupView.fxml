@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#hideLabels" onMouseClicked="#hideLabels" prefHeight="500.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="net.vatri.inventory.controllers.AddEditGroupController">
@@ -23,10 +19,10 @@
     <Button layoutX="325.0" layoutY="444.0" mnemonicParsing="false" onAction="#saveGroup" prefHeight="33.0" prefWidth="96.0" text="Save" />
     <Label fx:id="errorLabel" layoutX="156.0" layoutY="249.0" text="ERROR: invalid data!" textFill="RED" visible="false">
       <font>
-        <Font name="System Bold" size="13.0" fx:id="x1" />
+        <Font name="System Bold" size="13.0"  />
       </font>
     </Label>
-    <Label id="savedMessage" fx:id="savedLabel" focusTraversable="false" font="$x1" layoutX="210.0" layoutY="453.0" text="Group Saved!" textFill="GREEN" visible="false" />
+    <Label id="savedMessage" fx:id="savedLabel" focusTraversable="false" layoutX="210.0" layoutY="453.0" text="Group Saved!" textFill="GREEN" visible="false" />
     <Hyperlink layoutX="323.0" layoutY="32.0" onAction="#handleBack" text="&lt; Back to list" textFill="#1400ff">
       <font>
         <Font size="14.0" />
@@ -34,7 +30,7 @@
     </Hyperlink>
     <Label layoutX="191.0" layoutY="131.0" text="Will be applied to all products from group.">
       <font>
-        <Font size="11.0" fx:id="x2" />
+        <Font size="11.0"/>
       </font>
     </Label>
     <TableView fx:id="tblVariants" layoutX="125.0" layoutY="170.0" prefHeight="200.0" prefWidth="299.0">

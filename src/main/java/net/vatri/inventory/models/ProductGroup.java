@@ -12,8 +12,7 @@ public class ProductGroup {
     private String groupName;
     private String price;
     @Temporal(TemporalType.TIMESTAMP)
-    private String created;//Todo - Date type...
-
+    private String created;
     private List<GroupVariant> groupVariants = new ArrayList<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

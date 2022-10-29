@@ -37,7 +37,7 @@ public class AddEditGroupController extends BaseController implements Initializa
     @FXML
     private TextField newVariantNameFld;
 
-    // Based on this value, we know if this is adding or editing page...
+
     private String _groupId = App.getInstance().repository.get("selectedGroupId");
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,12 +48,9 @@ public class AddEditGroupController extends BaseController implements Initializa
     }
 
     private void _loadGroupData(String groupId) {
-        // System.out.println("Loading product " + productId);
         ProductGroup group = inventoryService.getGroup(groupId);
         fldName.setText(group.getGroupName());
         fldPrice.setText(group.getPrice());
-        // fldVariants.setText(group.getVariantsAsString());
-//		fldVariants.setText(inventoryService.getGroupVariantsAsString(group));
         _loadGroupVariantsTable(group);
     }
 
@@ -64,12 +61,11 @@ public class AddEditGroupController extends BaseController implements Initializa
 
     @FXML
     protected boolean saveGroup() {
-
-        if (!fldPrice.getText().matches("[0-9.]*") || fldName.getText().length() < 2) {
+        if (!fldPrice.getText().matches("^[0-9].*") || fldName.getText().length() < 2) {
             errorLabel.setVisible(true);
             return false;
-        } else {
-
+        }
+        else {
             ProductGroup group = new ProductGroup();
             if (_groupId != null && !_groupId.equals("")) {
                 group = inventoryService.getGroup(_groupId);
@@ -81,7 +77,6 @@ public class AddEditGroupController extends BaseController implements Initializa
             group.setPrice(fldPrice.getText());
             group.setGroupVariants(tblVariants.getItems());
 
-            // Required in order to save successfully by Hibernate...
             for (GroupVariant gv : group.getGroupVariants()) {
                 gv.setGroup(group);
             }
@@ -116,12 +111,11 @@ public class AddEditGroupController extends BaseController implements Initializa
     @FXML
     private void handleAddNewVariant() {
         if (newVariantNameFld.getText().length() > 0) {
-
             GroupVariant groupVariant = new GroupVariant();
             groupVariant.setVariantName(newVariantNameFld.getText());
             tblVariants.getItems().add(groupVariant);
             newVariantNameFld.setText("");
         }
     }
-}//class
+}
 

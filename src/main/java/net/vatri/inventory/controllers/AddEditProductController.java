@@ -4,6 +4,8 @@ import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -32,7 +34,6 @@ public class AddEditProductController extends BaseController implements Initiali
     @FXML
     private ComboBox<ProductGroup> groupCombo;
 
-    // Based on this value, we know if this is adding or editing page...
     private String _productId = App.getInstance().repository.get("selectedProductId");
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -77,23 +78,21 @@ public class AddEditProductController extends BaseController implements Initiali
 
     @FXML
     protected boolean handleSaveProduct(ActionEvent event) {
-
-        if (!fldPrice.getText().matches("[0-9.]*") || fldName.getText().length() < 2) {
+        if (!fldPrice.getText().matches("^[0-9].*") || fldName.getText().length() < 2) {
             errorLabel.setVisible(true);
             return false;
         }
 
-        // Set model data and save into database:
         Product product = new Product();
+        product.setCreated(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDate.now()));
         if (_productId != null) {
             product = inventoryService.getProduct(_productId);
         }
         product.setName(fldName.getText());
         product.setPrice(fldPrice.getText());
-        // If product group is selected, insert into database
         ProductGroup selectedGroup = groupCombo.getSelectionModel().getSelectedItem();
+
         if (selectedGroup != null) {
-            // insertData.put("group_id", selectedGroup.getId());
             product.setGroup(selectedGroup);
         }
 
@@ -103,7 +102,6 @@ public class AddEditProductController extends BaseController implements Initiali
             errorLabel.setText("ERROR: can't save your form. Please contact IT support team!");
             return false;
         } else {
-            // Clear fields when we insert a new item...
             if (_productId == null) {
                 fldName.setText("");
                 fldPrice.setText("");
@@ -114,5 +112,5 @@ public class AddEditProductController extends BaseController implements Initiali
         }
 
     }
-}//class
+}
 

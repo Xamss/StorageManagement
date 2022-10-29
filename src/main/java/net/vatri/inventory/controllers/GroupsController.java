@@ -28,8 +28,6 @@ public class GroupsController extends BaseController implements Initializable {
     private TableColumn<ProductGroup, String> groupCol;
     @FXML
     private TableColumn<ProductGroup, String> priceCol;
-    @FXML
-    private Button btnAddGroup;
 
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -42,7 +40,7 @@ public class GroupsController extends BaseController implements Initializable {
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         tblGroups.setItems(tblData);
-    }// all()
+    }
 
     @FXML
     protected void openGroup() {
@@ -55,7 +53,6 @@ public class GroupsController extends BaseController implements Initializable {
 
     @FXML
     protected void handleAddGroup() {
-        // Since we are adding group, set selected ID to null
         App.getInstance().repository.put("selectedGroupId", null);
         App.showPage("addEditGroup");
     }

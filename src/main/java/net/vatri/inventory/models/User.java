@@ -10,8 +10,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String accessToken;
-    private String created;//Todo - Date type...
+    private String created;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,15 +45,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Column(name = "access_token")
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
     }
 
     public String getCreated() {

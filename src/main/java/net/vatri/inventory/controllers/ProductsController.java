@@ -32,16 +32,12 @@ public class ProductsController extends BaseController implements Initializable 
     @FXML
     private TableColumn<Product, String> priceCol;
 
-    @FXML
-    private Button btnAddProd;
 
     public void initialize(URL url, ResourceBundle rb) {
-
 
         ObservableList<Product> tblData = FXCollections.observableArrayList(
                 inventoryService.getProducts()
         );
-
 
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -53,7 +49,6 @@ public class ProductsController extends BaseController implements Initializable 
 
     @FXML
     protected void handleAddProd() {
-        // Since we are adding product, set selected ID to null
         App.getInstance().repository.put("selectedProductId", null);
         App.showPage("newProduct");
     }

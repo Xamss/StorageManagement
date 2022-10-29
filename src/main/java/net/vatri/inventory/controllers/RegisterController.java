@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import net.vatri.inventory.App;
 import net.vatri.inventory.libs.BaseController;
-import net.vatri.inventory.models.Order;
 import net.vatri.inventory.models.User;
 
 import java.time.LocalDate;
