@@ -13,9 +13,8 @@ public class Order {
     private String zip;
     private String status;
     private String comment;
-    private String totalPrice;
     private String type;
-    private String created;//Todo - Date type...
+    private String created;
 
     private List<OrderItem> items;
 
@@ -75,15 +74,6 @@ public class Order {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    @Column(name = "total_price")
-    public String getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public String getType() {

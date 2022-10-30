@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
@@ -40,9 +39,6 @@ public class OrdersController extends BaseController implements Initializable {
     private TableColumn<Order, String> statusCol;
     @FXML
     private TableColumn<Order, String> commentCol;
-
-    @FXML
-    private Button btnAdd;
 
     public void initialize(URL url, ResourceBundle rb) {
 

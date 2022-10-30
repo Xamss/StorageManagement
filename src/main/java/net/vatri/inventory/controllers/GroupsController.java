@@ -26,8 +26,6 @@ public class GroupsController extends BaseController implements Initializable {
     private TableColumn<ProductGroup, String> idCol;
     @FXML
     private TableColumn<ProductGroup, String> groupCol;
-    @FXML
-    private TableColumn<ProductGroup, String> priceCol;
 
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -37,7 +35,6 @@ public class GroupsController extends BaseController implements Initializable {
 
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         groupCol.setCellValueFactory(new PropertyValueFactory<>("groupName"));
-        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         tblGroups.setItems(tblData);
     }

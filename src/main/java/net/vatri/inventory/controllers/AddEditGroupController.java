@@ -25,8 +25,6 @@ public class AddEditGroupController extends BaseController implements Initializa
     @FXML
     private TextField fldName;
     @FXML
-    private TextField fldPrice;
-    @FXML
     private Label errorLabel;
     @FXML
     private Label savedLabel;
@@ -50,7 +48,6 @@ public class AddEditGroupController extends BaseController implements Initializa
     private void _loadGroupData(String groupId) {
         ProductGroup group = inventoryService.getGroup(groupId);
         fldName.setText(group.getGroupName());
-        fldPrice.setText(group.getPrice());
         _loadGroupVariantsTable(group);
     }
 
@@ -61,7 +58,7 @@ public class AddEditGroupController extends BaseController implements Initializa
 
     @FXML
     protected boolean saveGroup() {
-        if (!fldPrice.getText().matches("^[0-9].*") || fldName.getText().length() < 2) {
+        if (fldName.getText().length() < 2) {
             errorLabel.setVisible(true);
             return false;
         }
@@ -74,7 +71,6 @@ public class AddEditGroupController extends BaseController implements Initializa
             }
 
             group.setGroupName(fldName.getText());
-            group.setPrice(fldPrice.getText());
             group.setGroupVariants(tblVariants.getItems());
 
             for (GroupVariant gv : group.getGroupVariants()) {
@@ -88,7 +84,6 @@ public class AddEditGroupController extends BaseController implements Initializa
 
                 if (_groupId == null) {
                     fldName.setText("");
-                    fldPrice.setText("");
                 }
                 savedLabel.setVisible(true);
                 errorLabel.setVisible(false);

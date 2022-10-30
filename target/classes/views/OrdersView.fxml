@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="665.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="net.vatri.inventory.controllers.OrdersController">
@@ -25,7 +23,7 @@
         <Font size="25.0" />
       </font>
     </Label>
-    <Button id="btnAddProd" fx:id="btnAdd" layoutX="152.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="30.0" prefWidth="95.0" text="Add" />
+    <Button id="btnAddProd" layoutX="152.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="30.0" prefWidth="95.0" text="Add" />
     <ComboBox fx:id="typeFilterCombo" layoutX="80.0" layoutY="87.0" onAction="#handleFilterByType">
       <items>
         <FXCollections fx:factory="observableArrayList">

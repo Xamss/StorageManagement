@@ -77,11 +77,10 @@ public class InventoryServiceHibernate implements InventoryService {
         session.beginTransaction();
         try {
             if (id != null && id > 0) {
-                session.merge(entity);// Doesn't work for GroupVariants for existing group
+                session.merge(entity);
             } else {
                 session.persist(entity);
             }
-//            session.saveOrUpdate(entity);
             session.getTransaction().commit();
             return true;
         } catch (HibernateException e) {

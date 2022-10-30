@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class OrderItem {
 
     private Integer id;
-    private String price;
 
     private Order order;
     private Product product;
@@ -21,14 +20,6 @@ public class OrderItem {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     @ManyToOne

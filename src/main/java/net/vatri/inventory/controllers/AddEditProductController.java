@@ -78,7 +78,9 @@ public class AddEditProductController extends BaseController implements Initiali
 
     @FXML
     protected boolean handleSaveProduct(ActionEvent event) {
+
         if (!fldPrice.getText().matches("^[0-9].*") || fldName.getText().length() < 2) {
+            savedLabel.setVisible(true);
             errorLabel.setVisible(true);
             return false;
         }

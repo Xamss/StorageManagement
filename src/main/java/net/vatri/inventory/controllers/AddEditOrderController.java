@@ -51,14 +51,10 @@ public class AddEditOrderController extends BaseController implements Initializa
     @FXML
     private TableColumn<GroupVariant, String> colVariant;
     @FXML
-    private TableColumn<OrderItem, String> colPrice;
-
-    @FXML
     private Label errorLabel;
     @FXML
     private Label savedLabel;
 
-    // Based on this value, we know if this is adding or editing page...
     private String _orderId = App.getInstance().repository.get("selectedOrderId");
     private Order editingOrder;
 
@@ -75,14 +71,7 @@ public class AddEditOrderController extends BaseController implements Initializa
 
         colProduct.setCellValueFactory(new PropertyValueFactory<>("product"));
         colVariant.setCellValueFactory(new PropertyValueFactory<>("groupVariant"));
-        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        colPrice.setCellFactory(TextFieldTableCell.<OrderItem>forTableColumn());
 
-        colPrice.setOnEditCommit((TableColumn.CellEditEvent<OrderItem, String> t) -> {
-            ((OrderItem) t.getTableView().getItems()
-                    .get(t.getTablePosition().getRow()))
-                    .setPrice(t.getNewValue());
-        });
 
         if (_orderId != null) {
             _loadOrderData(_orderId);
@@ -141,7 +130,6 @@ public class AddEditOrderController extends BaseController implements Initializa
     @FXML
     private void addProduct() {
 
-        // If no product is selected, just skip this action
         if (comboProducts.getSelectionModel().getSelectedItem() instanceof Product == false) {
             System.out.println("Value in product combo is not Product model");
             return;
@@ -155,8 +143,7 @@ public class AddEditOrderController extends BaseController implements Initializa
 
             item.setProduct(product);
             item.setGroupVariant(variant);
-
-            item.setOrder(this.editingOrder); // Ensures saving of orderitem
+            item.setOrder(this.editingOrder);
 
             tblItems.getItems().add(item);
             comboProducts.getSelectionModel().selectFirst();
@@ -182,13 +169,17 @@ public class AddEditOrderController extends BaseController implements Initializa
         order.setZip(fldZip.getText());
         order.setStatus(comboStatus.getSelectionModel().getSelectedItem());
         order.setComment(fldComment.getText());
+        for(OrderItem item : tblItems.getItems()){
+            item.setOrder(order);
+        }
         order.setItems(tblItems.getItems());
 
         if (inventoryService.saveOrder(order)) {
             this.removeItems();
-            App.showPage("orders");
+            handleBack();
         } else {
             System.out.println("Can't save order!");
+            savedLabel.setVisible(false);
             errorLabel.setVisible(true);
         }
 

@@ -10,7 +10,6 @@ public class ProductGroup {
 
     private Integer id;
     private String groupName;
-    private String price;
     @Temporal(TemporalType.TIMESTAMP)
     private String created;
     private List<GroupVariant> groupVariants = new ArrayList<>();
@@ -43,13 +42,6 @@ public class ProductGroup {
         this.groupName = groupName;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
 
     public String getCreated() {
         return created;
