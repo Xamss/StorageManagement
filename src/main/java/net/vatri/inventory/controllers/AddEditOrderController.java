@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javafx.scene.control.cell.TextFieldTableCell;
 import net.vatri.inventory.App;
 import net.vatri.inventory.libs.BaseController;
 import net.vatri.inventory.models.*;
