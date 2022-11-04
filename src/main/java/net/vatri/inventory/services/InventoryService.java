@@ -13,7 +13,6 @@ public interface InventoryService {
 
     public boolean saveUser(User user);
 
-    // todo: offset?!
     public List<Product> getProducts();
 
     public Product getProduct(String id);
@@ -34,6 +33,10 @@ public interface InventoryService {
     public boolean saveVariant(GroupVariant variant);
 
     public List<Order> getOrders();
+
+    public List<EmailModel> sendEmail();
+
+    public void emailProcess();
 
     public List<Order> getOrders(Map<String, String> params);
 

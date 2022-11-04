@@ -1,6 +1,6 @@
 package net.vatri.inventory.services;
 
-import net.vatri.inventory.models.Product;
+import net.vatri.inventory.models.EmailModel;
 
 import java.util.List;
 import java.util.Properties;
@@ -18,7 +18,7 @@ public class EmailNotify {
     private static String host = "smtp.gmail.com";
 
 
-    public static void sendEmail(String to, List<Product> products){
+    public static void sendEmail(String to, List<EmailModel> products){
         Session session = sessionPrepare();
         try {
             String text = "<h1>Stock updated:</h1><ul>";
@@ -29,8 +29,8 @@ public class EmailNotify {
 
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-            for(Product product: products){
-                text +="<li>"+product.getName()+"</li>";
+            for(EmailModel product: products){
+                text +="<li>"+product.getProductName()+" "+product.getQuantity()+"</li>";
             }
 
             text+="</ul>";
@@ -62,7 +62,7 @@ public class EmailNotify {
 
             protected PasswordAuthentication getPasswordAuthentication() {
 
-                return new PasswordAuthentication("maynardlonnie44@gmail.com", "wqnpcmcrzvjjpjkf");
+                return new PasswordAuthentication("maynardlonnie44@gmail.com", "");
 
             }
 

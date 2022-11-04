@@ -85,6 +85,7 @@ public class OrdersController extends BaseController implements Initializable {
 
     @FXML
     protected void handleAdd() {
+        App.getInstance().repository.put("selectedOrderId",null);
         App.showPage("addEditOrder");
     }
 

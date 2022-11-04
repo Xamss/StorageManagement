@@ -1,7 +1,6 @@
 package net.vatri.inventory.services;
 
 import net.vatri.inventory.models.*;
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,15 +16,9 @@ public class InventoryServiceHibernate implements InventoryService {
 
     private SessionFactory sessionFactory;
 
-    // Table name definitions:
     private static final String TBL_PRODUCTS = "products";
     private static final String TBL_PRODUCT_GROUPS = "product_groups";
-    private static final String TBL_USERS = "users";
-    private static final String TBL_PRODUCT_GROUP_VARIANTS = "group_variants";
-
     private static final String TBL_ORDERS = "orders";
-    private static final String TBL_ORDER_ITEMS = "order_items";
-    // private static final String TBL_PURCHASES = "purchases";
 
     public InventoryServiceHibernate(SessionFactory sessionFactory) {
         this.setSessionFactory(sessionFactory);
@@ -39,12 +32,6 @@ public class InventoryServiceHibernate implements InventoryService {
         this.sessionFactory = sessionFactory;
     }
 
-    /**
-     * Get list of Hibernate entities
-     *
-     * @param name Name of Entity
-     * @return List
-     */
     private List list(String name) {
         Session session = getSessionFactory().openSession();
         try {
@@ -54,13 +41,6 @@ public class InventoryServiceHibernate implements InventoryService {
         }
     }
 
-    /**
-     * Get hibernate entity by ID (primary key)
-     *
-     * @param entity For example: Product.class
-     * @param id     Id of entity to get
-     * @return Object
-     */
     private Object get(Class entity, String id) {
 
         Session session = getSessionFactory().openSession();
@@ -243,7 +223,6 @@ public class InventoryServiceHibernate implements InventoryService {
                 .createNativeQuery(strQuery)
                 .getResultList();
 
-// System.out.println(tmpList);
 
         List<StockModel> res = new ArrayList<>();
         tmpList.stream().forEach(row -> {
@@ -259,6 +238,40 @@ public class InventoryServiceHibernate implements InventoryService {
 
         session.close();
         return res;
+    }
+
+    @Override
+    public List<EmailModel> sendEmail(){
+        String strQuery = "select p.name, orders.type, count(*) quantity from orders join order_items oi on orders.id = oi.order_id\n" +
+                "join products p on oi.product_id = p.id group by p.name, type limit 5;";
+
+        Session session = getSessionFactory().openSession();
+        List<Object[]> tmpList = session.getEntityManagerFactory()
+                .createEntityManager()
+                .createNativeQuery(strQuery)
+                .getResultList();
+
+        List<EmailModel> res = new ArrayList<>();
+        tmpList.stream().forEach(row -> {
+            if (row.length > 2) {
+                String productName = (String) row[0];
+                String typeName = (String) row[1];
+                String qty = row[2].toString();
+                res.add(new EmailModel(productName, typeName, qty));
+            } else {
+                System.out.println("Can't initialize stock model");
+            }
+        });
+        return res;
+    }
+
+    @Override
+    public void emailProcess(){
+        List<EmailModel> emailModels = sendEmail();
+        List<User> users = getUsers();
+        for (User user: users) {
+            EmailNotify.sendEmail(user.getEmail(), emailModels);
+        }
     }
 
     @Override
@@ -280,7 +293,6 @@ public class InventoryServiceHibernate implements InventoryService {
                 + " , (SELECT count(*) FROM " + TBL_ORDERS + " where created LIKE '%" + month3 + "%' ) as orders3"
                 + " , (SELECT count(*) FROM " + TBL_ORDERS + " where created LIKE '%" + month4 + "%' ) as orders4";
 
-//            return getQueryBuilder().query(strQuery).first();
         Session session = getSessionFactory().openSession();
         Object[] res = (Object[]) session.getEntityManagerFactory()
                 .createEntityManager()

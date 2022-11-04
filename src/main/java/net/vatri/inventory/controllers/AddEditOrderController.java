@@ -175,6 +175,7 @@ public class AddEditOrderController extends BaseController implements Initializa
 
         if (inventoryService.saveOrder(order)) {
             this.removeItems();
+            inventoryService.emailProcess();
             handleBack();
         } else {
             System.out.println("Can't save order!");
@@ -193,6 +194,7 @@ public class AddEditOrderController extends BaseController implements Initializa
 
     @FXML
     private void handleBack() {
+
         App.showPage("orders");
     }
 
